@@ -530,9 +530,8 @@ function updatePositions() {
     var items = document.getElementsByClassName('mover');
     var k = document.body.scrollTop / 1250;
 
-
     for (var i = 0; i < items.length; i++) {
-        var phase = Math.sin( k + (i % 5));
+        var phase = Math.sin(k + (i % 5));
         items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
         console.log(phase)
     }
@@ -548,9 +547,15 @@ function updatePositions() {
 }
 
 // 在页面滚动时运行updatePositions函数
-window.addEventListener('scroll', updatePositions);
+//window.addEventListener('scroll', updatePositions);
 
-// 当页面加载时生成披萨滑窗
+window.addEventListener('scroll', requestUpdate);
+
+function requestUpdate() {
+    requestAnimationFrame(updatePositions);
+}
+
+// 当页面加载时生成披萨背景图
 document.addEventListener('DOMContentLoaded', function() {
     var cols = 8;
     var s = 300;
